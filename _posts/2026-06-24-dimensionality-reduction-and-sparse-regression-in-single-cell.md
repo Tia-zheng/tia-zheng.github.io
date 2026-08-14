@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Dimensionality reduction and sparse regression in single-cell cancer analysis
+title: Dimensionality reduction and sparse regression in an exploratory single-cell analysis
 date: 2026-06-24 15:30:00-0400
-description: A readable guide to PCA, t-SNE, UMAP, linear regression, and sparse survival modeling using colorectal cancer single-cell analysis as an example.
+description: A technical companion on PCA, t-SNE, UMAP, and sparse survival modeling using an earlier exploratory GSE178341 workflow.
 tags: single-cell bioinformatics dimensionality-reduction regression cancer-biology
 categories: methods
 related_posts: false
@@ -18,9 +18,11 @@ This post is about two families of methods that help with that problem:
 
 I will explain the intuition first, then show how these ideas appeared in my colorectal cancer single-cell analysis using public `GSE178341` data. The goal is not to prove every theorem. The goal is to understand what each method is trying to preserve, what its math means, and how the result should be interpreted in a real analysis.
 
+> **Scope note.** This post documents an earlier exploratory Scissor and Scissor-style workflow, not the primary survival or patient-level single-cell analysis in the final manuscript. Its historical bulk input contained 1,719 samples and 383 events; the final manuscript's primary GEO meta-analysis contains 1,783 tumors and 441 progression-related events. The detailed subgroup results below are useful for learning the methods but should not be substituted for the manuscript's confirmatory claims. For the final study narrative, begin with [Beyond the Tumor Cell]({% link _pages/cancer-signature-series.md %}).
+
 ## The experiment in one paragraph
 
-The analysis folder `single_cell/GSE178341_crc_immune_hubs` reproduces and extends a public-data workflow for colorectal cancer single-cell RNA-seq. The detailed-subgroup setup contains **87 cell subgroups** and **370,115 cells** across epithelial, stromal, immune, plasma, mast, and B-cell compartments. The survival-linked analysis uses **84 CRC-axis genes**, **1,719 bulk PFS samples**, and **383 PFS events**. For visualization, the workflow uses the public paper-style t-SNE coordinates and treats UMAP as an additional generated view when public UMAP coordinates are not available.
+The analysis folder `single_cell/GSE178341_crc_immune_hubs` reproduces and extends a public-data workflow for colorectal cancer single-cell RNA-seq. The detailed-subgroup setup contains **87 cell subgroups** and **370,115 cells** across epithelial, stromal, immune, plasma, mast, and B-cell compartments. The historical survival-linked input uses **84 CRC-axis genes**, **1,719 bulk samples**, and **383 events**. These counts describe this technical workflow only. For visualization, the workflow uses the public paper-style t-SNE coordinates and treats UMAP as an additional generated view when public UMAP coordinates are not available.
 
 ## Part 1: PCA, t-SNE, and UMAP
 
@@ -158,11 +160,11 @@ The intuition is that connected cells should stay close, while disconnected cell
 
 In this project, UMAP was treated as an additional analysis view when generated from the public processed H5AD object. The original paper-style visual output is t-SNE based, so the blog and figures focus on t-SNE for the concrete experiment results.
 
-| Method | Question it answers | What it preserves best | How it appeared in this project |
-| --- | --- | --- | --- |
-| PCA | What are the strongest linear axes of variation? | Global variance | Used before nearest-neighbor graph construction in the official Scissor workflow |
-| t-SNE | Which cells are local neighbors? | Local neighborhoods | Used as the public atlas coordinate system for visualization and overlays |
-| UMAP | What neighbor graph structure can be shown in 2D? | Local graph connectivity, often with more continuity than t-SNE | Treated as an additional generated visualization when public UMAP coordinates were absent |
+| Method | Question it answers                               | What it preserves best                                          | How it appeared in this project                                                           |
+| ------ | ------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| PCA    | What are the strongest linear axes of variation?  | Global variance                                                 | Used before nearest-neighbor graph construction in the official Scissor workflow          |
+| t-SNE  | Which cells are local neighbors?                  | Local neighborhoods                                             | Used as the public atlas coordinate system for visualization and overlays                 |
+| UMAP   | What neighbor graph structure can be shown in 2D? | Local graph connectivity, often with more continuity than t-SNE | Treated as an additional generated visualization when public UMAP coordinates were absent |
 
 ### What the dimensionality-reduction results meant here
 
@@ -176,7 +178,7 @@ For **UMAP**, the result was more cautious. The project README records that the 
 
 Dimensionality reduction helps us look at cells. Regression helps us ask whether a measurement is associated with an outcome.
 
-In cancer biology, an outcome might be tumor type, treatment response, survival time, progression-free survival, or a risk group. In this project, the outcome was progression-free survival (PFS) from bulk data, linked back to single-cell profiles through shared genes.
+In cancer biology, an outcome might be tumor type, treatment response, survival time, progression-free survival, or a risk group. In this exploratory workflow, a historical PFS-labeled bulk input was linked to single-cell profiles through shared genes. This is separate from the final manuscript's harmonized progression-related endpoint analysis.
 
 ### Linear regression: fitting a line in many dimensions
 
@@ -257,24 +259,24 @@ The **local Scissor-style branch** was an axis-focused Cox analysis. It did not 
 
 The PFS input contained **1,719 samples**, **383 events**, and follow-up times ranging from **0.3** to **201.0** months, with a median around **41.4** months.
 
-In plain language, the regression question was: if a cell looks more like the expression pattern associated with shorter or longer PFS in bulk data, can we identify that cell or subgroup as clinically relevant? Sparse modeling is important here because the gene list is still large enough to contain correlated signals, and because a smaller set of genes is easier to interpret biologically.
+In plain language, the regression question was: if a cell looks more like the expression pattern associated with shorter or longer survival in the historical bulk input, can we flag that cell or subgroup for exploratory follow-up? This does not make an individual cell an independent patient or establish patient-level prognosis. Sparse modeling is important here because the gene list is still large enough to contain correlated signals, and because a smaller set of genes is easier to interpret biologically.
 
 ### Official Scissor results
 
 The strongest official Scissor+ signals were concentrated in stromal and vascular-associated populations. The top detailed subgroups by Scissor+ percentage were:
 
-| Subgroup | Cell type label | Scissor+ cells | Scissor+ % |
-| --- | --- | --- | --- |
-| cS07 | Endo capillary-like | 51 / 100 | 51.00 |
-| cS14 | Endo | 74 / 146 | 50.68 |
-| cS23 | Fibro BMP-producing | 108 / 233 | 46.35 |
-| cS26 | Myofibro | 114 / 246 | 46.34 |
-| cS11 | Endo proif | 90 / 203 | 44.34 |
-| cS30 | CAF CCL8 Fibro-like | 116 / 262 | 44.27 |
-| cM03 | DC1 | 135 / 309 | 43.69 |
-| cS16 | Pericyte | 85 / 198 | 42.93 |
-| cS04 | Endo | 84 / 199 | 42.21 |
-| cS29 | MMP3+ CAF | 162 / 384 | 42.19 |
+| Subgroup | Cell type label     | Scissor+ cells | Scissor+ % |
+| -------- | ------------------- | -------------- | ---------- |
+| cS07     | Endo capillary-like | 51 / 100       | 51.00      |
+| cS14     | Endo                | 74 / 146       | 50.68      |
+| cS23     | Fibro BMP-producing | 108 / 233      | 46.35      |
+| cS26     | Myofibro            | 114 / 246      | 46.34      |
+| cS11     | Endo proif          | 90 / 203       | 44.34      |
+| cS30     | CAF CCL8 Fibro-like | 116 / 262      | 44.27      |
+| cM03     | DC1                 | 135 / 309      | 43.69      |
+| cS16     | Pericyte            | 85 / 198       | 42.93      |
+| cS04     | Endo                | 84 / 199       | 42.21      |
+| cS29     | MMP3+ CAF           | 162 / 384      | 42.19      |
 
 At the broad-lineage level, stromal cells had the strongest official Scissor enrichment: **36.49% Scissor+** and **34.85% Scissor-** among tested stromal cells. Myeloid cells had lower overall percentages, but the DC1 subgroup cM03 still appeared in the top detailed-subgroup list.
 
@@ -303,16 +305,16 @@ At the broad-lineage level, stromal cells had the strongest official Scissor enr
 
 The Scissor-style branch produced much stronger positive labeling in some stromal/pericyte populations. Several subgroups had nearly all cells labeled positive, including:
 
-| Subgroup | Cell type label | Positive cells | Positive % |
-| --- | --- | --- | --- |
-| cS18 | Pericyte | 234 / 234 | 100.00 |
-| cS04 | Endo | 199 / 199 | 100.00 |
-| cS20 | Pericyte prolif | 44 / 44 | 100.00 |
-| cS19 | Pericyte | 374 / 374 | 100.00 |
-| cS21 | Fibro stem cell niche | 541 / 542 | 99.82 |
-| cS31 | CAF stem niche Fibro-like | 491 / 492 | 99.80 |
-| cS32 | Smooth Muscle | 879 / 881 | 99.77 |
-| cS17 | Pericyte | 382 / 383 | 99.74 |
+| Subgroup | Cell type label           | Positive cells | Positive % |
+| -------- | ------------------------- | -------------- | ---------- |
+| cS18     | Pericyte                  | 234 / 234      | 100.00     |
+| cS04     | Endo                      | 199 / 199      | 100.00     |
+| cS20     | Pericyte prolif           | 44 / 44        | 100.00     |
+| cS19     | Pericyte                  | 374 / 374      | 100.00     |
+| cS21     | Fibro stem cell niche     | 541 / 542      | 99.82      |
+| cS31     | CAF stem niche Fibro-like | 491 / 492      | 99.80      |
+| cS32     | Smooth Muscle             | 879 / 881      | 99.77      |
+| cS17     | Pericyte                  | 382 / 383      | 99.74      |
 
 This difference is important. A broad positive rate in the Scissor-style branch does not mean the same thing as a Scissor+ call in the official branch, because the model structure is different. The Scissor-style branch is useful as a focused comparison around CRC-axis survival association, while the official branch is the better match to the published Scissor method.
 
@@ -346,4 +348,4 @@ PCA, t-SNE, and UMAP help answer a structural question: how are cells arranged r
 
 Regression asks a different question: how do molecular features relate to an outcome? Sparse regression adds interpretability by shrinking weak signals and emphasizing a smaller set of features. Cox modeling adapts this idea to survival data.
 
-In this colorectal cancer analysis, dimensionality reduction helped organize and visualize the single-cell atlas, while Scissor and Scissor-style survival modeling linked cell states and CRC-axis genes to PFS-associated signals. The strongest official Scissor+ patterns appeared in stromal, endothelial, fibroblast, pericyte, myofibroblast, and selected myeloid/DC populations, with driver-gene summaries pointing toward angiogenesis, extracellular matrix, inflammatory signaling, and TGF-beta-related biology.
+In this exploratory colorectal cancer workflow, dimensionality reduction helped organize and visualize the single-cell atlas, while Scissor and Scissor-style modeling linked cell states and CRC-axis genes to a historical bulk survival signal. The strongest official Scissor+ patterns appeared in stromal, endothelial, fibroblast, pericyte, myofibroblast, and selected myeloid/DC populations, with driver-gene summaries pointing toward angiogenesis, extracellular matrix, inflammatory signaling, and TGF-beta-related biology. These are hypothesis-generating cell-localization results, not 370,115 independent patient observations. [The patient-level pseudobulk article]({{ '/blog/2026/cells-are-not-patients/' | relative_url }}) explains the inferential distinction.

@@ -27,6 +27,10 @@ pagination:
     <h1>{{ site.blog_name }}</h1>
     <h2>{{ site.blog_description }}</h2>
   </div>
+  <p class="text-center">
+    <strong>Featured series:</strong>
+    <a href="{{ '/blog/cancer-signature-series/' | relative_url }}">Beyond the Tumor Cell: What Does a Cancer Signature Really Mean?</a>
+  </p>
   {% endif %}
 
 {% if site.display_tags and site.display_tags.size > 0 or site.display_categories and site.display_categories.size > 0 %}
