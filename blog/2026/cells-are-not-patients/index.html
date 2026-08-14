@@ -1,0 +1,268 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Why 433,804 cells are not 433,804 patients | Tia Zheng </title> <meta name="author" content="Tia Zheng"> <meta name="description" content="Single cells are nested within people, so patient-level questions require patient-level replication rather than treating every cell as independent."> <meta name="keywords" content="bioinformatics, cancer biology, single-cell analysis, data science, research blog"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%AC&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://tia-zheng.github.io/blog/2026/cells-are-not-patients/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Tia</span> Zheng </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">Blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">Projects </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Why 433,804 cells are not 433,804 patients</h1> <p class="post-meta"> Created on August 10, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/single-cell"> <i class="fa-solid fa-hashtag fa-sm"></i> single-cell</a>   <a href="/blog/tag/pseudobulk"> <i class="fa-solid fa-hashtag fa-sm"></i> pseudobulk</a>   <a href="/blog/tag/statistics"> <i class="fa-solid fa-hashtag fa-sm"></i> statistics</a>   <a href="/blog/tag/study-design"> <i class="fa-solid fa-hashtag fa-sm"></i> study-design</a>   <a href="/blog/tag/colorectal-cancer"> <i class="fa-solid fa-hashtag fa-sm"></i> colorectal-cancer</a>   ·   <a href="/blog/category/cancer-signature-series"> <i class="fa-solid fa-tag fa-sm"></i> cancer-signature-series</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <blockquote> <p><strong>Beyond the Tumor Cell, Part 3 of 7.</strong> <a href="/blog/cancer-signature-series/">View the complete series.</a></p> </blockquote> <p>Single-cell RNA sequencing produces tables with an astonishing number of columns or rows, depending on how the matrix is stored. A study may contain hundreds of thousands of cells. That scale creates a tempting but incorrect thought:</p> <blockquote> <p>If I measured 20,000 cells, do I have 20,000 independent biological samples?</p> </blockquote> <p>Usually, no. If those cells came from 10 patients, then the study still has only 10 independently sampled patients for a patient-level question.</p> <p>This is the difference between the <strong>unit of observation</strong> and the <strong>unit of inference</strong>.</p> <h2 id="observation-is-not-the-same-as-replication">Observation is not the same as replication</h2> <p>A single cell is an observation. A gene count in that cell is real data. But cells from the same person share genetics, treatment history, tissue environment, collection procedure, and many technical effects. Two cells from one tumor are generally more related than two cells sampled from different patients.</p> <p>Treating all cells as independent would be similar to measuring one student’s blood pressure 1,000 times and claiming a study of 1,000 students. More measurements can improve our estimate for that student, but they do not create new people.</p> <p>The hierarchy in this project looked like this:</p> <ul> <li> <strong>Bulk transcriptomics:</strong> the repeated observations were tumor-expression vectors. The independent biological unit was the patient within a cohort.</li> <li> <strong>Single-cell RNA-seq:</strong> the repeated observations were cells nested within patient, tissue, and cell type. The independent biological unit for the main comparisons was the patient.</li> <li> <strong>Spatial transcriptomics:</strong> the repeated observations were spots nested within tissue sections. The independent unit was the patient or section, depending on the claim.</li> </ul> <p>The exact unit must follow the scientific question. If the question is “where is a gene expressed?”, cells can be plotted descriptively. If the question is “do colorectal cancer patients tend to have higher tumor scores than normal-tissue scores?”, patients must provide the replication.</p> <h2 id="the-pseudoreplication-problem">The pseudoreplication problem</h2> <p>Suppose Patient A contributes 30,000 fibroblasts and Patient B contributes 300. A cell-level test would allow Patient A to dominate the result simply because more of that tumor was captured. It would also calculate uncertainty as though all 30,300 cells came from independent people. The resulting value can look extremely significant even when the difference is driven by one patient.</p> <p>This is called <strong>pseudoreplication</strong>: counting correlated measurements as independent replicates.</p> <p>The problem is not fixed by having a balanced number of cells per group if those cells still come from very few patients. Nor is it fixed by plotting each cell as a dot. The number of dots in a figure is not necessarily the biological sample size.</p> <h2 id="what-pseudobulk-does">What pseudobulk does</h2> <p>For the patient-level single-cell analysis, we used a pseudobulk strategy. Within each dataset, counts were summed separately for every combination of:</p> \[\text{patient} \times \text{tissue} \times \text{broad cell type}.\] <p>For example, all eligible fibroblasts from one patient’s tumor became one fibroblast-tumor pseudobulk profile. Fibroblasts from that patient’s normal tissue became another profile. The same procedure was repeated for epithelial, myeloid, endothelial, and other broad compartments.</p> <p>This approach has two benefits. It respects the patient as the independent unit, and it models count data at a level where established bulk-RNA methods work well. It does sacrifice cell-to-cell detail, but that detail is not the correct source of replication for a patient-level tumor-versus-normal claim.</p> <p>The workflow also required a minimum number of cells per pseudobulk profile. The primary threshold was 50 cells, with 20- and 100-cell thresholds used as sensitivity analyses. This prevented an unstable profile based on only a handful of cells from being treated like a well-sampled profile.</p> <h2 id="what-happened-in-our-two-single-cell-datasets">What happened in our two single-cell datasets</h2> <p>The project used two public colorectal cancer atlases:</p> <ul> <li>GSE178341 contained 370,115 cells from 62 patients.</li> <li>GSE132465 contained 63,689 cells from 23 patients.</li> </ul> <p>Together they contained 433,804 cells, but only 85 patients. Even 85 is not the sample size for every comparison because not every patient had every tissue and cell type. The fibroblast/CAF tumor-normal comparison in GSE178341, for example, had only five matched patient pairs at the primary threshold.</p> <p>That comparison showed a tumor-higher score, but its paired Wilcoxon p value was 0.0625. Reporting 5,231 fibroblasts as 5,231 independent replicates would have hidden the real uncertainty.</p> <p>At the descriptive cell level, fibroblasts/CAFs had the highest median annotation score, followed by other stromal, endothelial, and myeloid compartments. This was useful localization evidence. It was not a patient-level survival analysis, and neither single-cell dataset contained the progression outcomes needed to make it one.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/single-cell-methods/gse178341-global-tsne-mmr-480.webp 480w,/assets/img/blog/single-cell-methods/gse178341-global-tsne-mmr-800.webp 800w,/assets/img/blog/single-cell-methods/gse178341-global-tsne-mmr-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/blog/single-cell-methods/gse178341-global-tsne-mmr.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" alt="GSE178341 single-cell colorectal cancer atlas" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <div class="caption"> The GSE178341 atlas contains hundreds of thousands of plotted cells, but those cells are nested within 62 patients. Visual resolution at the cell level does not create patient-level replication. </div> <h2 id="paired-data-are-especially-valuable">Paired data are especially valuable</h2> <p>When tumor and normal tissue come from the same patient, each person can act as their own control. A paired comparison asks whether the score tends to change within patients, rather than comparing two unrelated groups that may differ in age, genetics, collection site, or other factors.</p> <p>We used paired tests when at least three matched patients were available. If there were too few pairs but at least five patients in each tissue group, an unpaired comparison was labeled exploratory. Otherwise, the result was marked non-estimable.</p> <p>“Non-estimable” is not a failure to run a test. It is a scientifically honest statement that the available independent units cannot support that comparison.</p> <h2 id="spatial-spots-create-the-same-issue">Spatial spots create the same issue</h2> <p>The spatial dataset retained 16,171 spots across four tissue sections. Yet those four sections came from only two patients. The spots are measurements of locations, not 16,171 independent people. They can show spatial organization within a section, but they cannot support population-level claims about colorectal cancer patients.</p> <p>This is why the paper reported section-level correlations and descriptive patient summaries without a two-patient hypothesis test. More pixels, spots, or cells improve resolution within a specimen; they do not automatically improve generalizability across people.</p> <h2 id="a-practical-checklist">A practical checklist</h2> <p>Before running a statistical test on single-cell or spatial data, ask:</p> <ol> <li>What entity was independently recruited or sampled?</li> <li>Which observations share the same patient, sample, or tissue section?</li> <li>At what level is the scientific claim being made?</li> <li>Does the model account for the nested structure?</li> <li>Could one patient dominate because they contributed more cells?</li> </ol> <p>If the claim is about patients, the uncertainty must ultimately come from variation across patients.</p> <h2 id="what-we-can-and-cannot-say">What we can and cannot say</h2> <p><strong>Supported:</strong> Hundreds of thousands of cells provide rich cellular localization. Patient-level pseudobulk analysis can test tumor-normal state differences while preserving the patient as the inferential unit.</p> <p><strong>Not supported:</strong> The cell count is not the patient sample size. These single-cell datasets do not independently validate progression prognosis because they do not contain progression outcomes.</p> <p>The basic rule is worth remembering: <strong>measurement depth and biological replication are different resources</strong>. A strong study needs to know which one it has.</p> <p><strong>Previous:</strong> <a href="/blog/2026/neural-stromal-and-emt-labels/">Are neural, stromal, and EMT programs really separate?</a><br> <strong>Next:</strong> <a href="/blog/2026/pca-clustering-patterns-not-prognosis/">PCA and clustering find patterns, but do not prove prognosis.</a></p> </div> </article> </div> </div> <footer class="sticky-bottom mt-5" role="contentinfo"> <div class="container"> © Copyright 2026 Tia Zheng. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "About",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "Blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-projects",
+          title: "Projects",
+          description: "Research, analysis, and coding projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "post-when-adjustment-removes-the-biology-we-wanted-to-study",
+        
+          title: "When adjustment removes the biology we wanted to study",
+        
+        description: "Adjustment can control confounding or redefine the scientific question, and cross-fitting cannot repair noisy measurements or a misspecified model.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/when-adjustment-removes-biology/";
+          
+        },
+      },{id: "post-how-independent-must-a-biomarker-be",
+        
+          title: "How independent must a biomarker be?",
+        
+        description: "Prognostic association, biological meaning, and added clinical value are different standards, and a marker can meet one without meeting all three.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/how-independent-must-a-biomarker-be/";
+          
+        },
+      },{id: "post-kaplan-meier-and-cox-models-why-do-we-need-both",
+        
+          title: "Kaplan-Meier and Cox models: why do we need both?",
+        
+        description: "Kaplan-Meier curves show survival experience, while Cox models quantify associations and can use continuous predictors and clinical covariates.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kaplan-meier-and-cox/";
+          
+        },
+      },{id: "post-pca-and-clustering-find-patterns-but-do-not-prove-prognosis",
+        
+          title: "PCA and clustering find patterns, but do not prove prognosis",
+        
+        description: "PCA summarizes variation and clustering assigns groups; neither method knows whether those groups matter for patient outcomes.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/pca-clustering-patterns-not-prognosis/";
+          
+        },
+      },{id: "post-why-433-804-cells-are-not-433-804-patients",
+        
+          title: "Why 433,804 cells are not 433,804 patients",
+        
+        description: "Single cells are nested within people, so patient-level questions require patient-level replication rather than treating every cell as independent.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/cells-are-not-patients/";
+          
+        },
+      },{id: "post-are-neural-stromal-and-emt-programs-really-separate",
+        
+          title: "Are neural, stromal, and EMT programs really separate?",
+        
+        description: "Biological labels are useful maps, but shared genes and reused developmental programs do not automatically prove a unified mechanism.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/neural-stromal-and-emt-labels/";
+          
+        },
+      },{id: "post-why-looking-beyond-cancer-cells-helps-us-understand-cancer",
+        
+          title: "Why looking beyond cancer cells helps us understand cancer",
+        
+        description: "A tumor is a tissue ecosystem, so a prognostic expression signal may come from fibroblasts, matrix, vessels, and immune cells as well as malignant cells.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/looking-beyond-cancer-cells/";
+          
+        },
+      },{id: "post-dimensionality-reduction-and-sparse-regression-in-an-exploratory-single-cell-analysis",
+        
+          title: "Dimensionality reduction and sparse regression in an exploratory single-cell analysis",
+        
+        description: "A technical companion on PCA, t-SNE, UMAP, and sparse survival modeling using an earlier exploratory GSE178341 workflow.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/dimensionality-reduction-and-sparse-regression-in-single-cell/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-a-simple-inline-announcement",
+          title: 'A simple inline announcement.',
+          description: "",
+          section: "News",},{id: "news-a-long-announcement-with-details",
+          title: 'A long announcement with details',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_2/";
+            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',
+          description: "",
+          section: "News",},{id: "projects-project-1",
+          title: 'project 1',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_project/";
+            },},{id: "projects-project-2",
+          title: 'project 2',
+          description: "a project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_project/";
+            },},{id: "projects-project-3-with-very-long-name",
+          title: 'project 3 with very long name',
+          description: "a project that redirects to another website",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_project/";
+            },},{id: "projects-project-4",
+          title: 'project 4',
+          description: "another without an image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/4_project/";
+            },},{id: "projects-project-5",
+          title: 'project 5',
+          description: "a project with a background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project/";
+            },},{id: "projects-project-6",
+          title: 'project 6',
+          description: "a project with no image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_project/";
+            },},{id: "projects-project-7",
+          title: 'project 7',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/7_project/";
+            },},{id: "projects-project-8",
+          title: 'project 8',
+          description: "an other project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_project/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/9_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/example_pdf.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%79%6F%75@%65%78%61%6D%70%6C%65.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-inspire',
+        title: 'Inspire HEP',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://inspirehep.net/authors/1010907", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=qc6CJjYAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-custom_social',
+        title: 'Custom_social',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.alberteinstein.com/", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

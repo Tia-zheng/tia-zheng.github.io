@@ -1,0 +1,268 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Why looking beyond cancer cells helps us understand cancer | Tia Zheng </title> <meta name="author" content="Tia Zheng"> <meta name="description" content="A tumor is a tissue ecosystem, so a prognostic expression signal may come from fibroblasts, matrix, vessels, and immune cells as well as malignant cells."> <meta name="keywords" content="bioinformatics, cancer biology, single-cell analysis, data science, research blog"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%AC&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://tia-zheng.github.io/blog/2026/looking-beyond-cancer-cells/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Tia</span> Zheng </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">Blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">Projects </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Why looking beyond cancer cells helps us understand cancer</h1> <p class="post-meta"> Created on August 08, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/cancer-biology"> <i class="fa-solid fa-hashtag fa-sm"></i> cancer-biology</a>   <a href="/blog/tag/tumor-microenvironment"> <i class="fa-solid fa-hashtag fa-sm"></i> tumor-microenvironment</a>   <a href="/blog/tag/transcriptomics"> <i class="fa-solid fa-hashtag fa-sm"></i> transcriptomics</a>   <a href="/blog/tag/colorectal-cancer"> <i class="fa-solid fa-hashtag fa-sm"></i> colorectal-cancer</a>   ·   <a href="/blog/category/cancer-signature-series"> <i class="fa-solid fa-tag fa-sm"></i> cancer-signature-series</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <blockquote> <p><strong>Beyond the Tumor Cell, Part 1 of 7.</strong> <a href="/blog/cancer-signature-series/">View the complete series.</a></p> </blockquote> <p>When people hear <em>cancer biology</em>, they often picture a malignant cell accumulating mutations and dividing out of control. That picture is important, but incomplete. A tumor is also a tissue. It contains fibroblasts, immune cells, blood vessels, extracellular matrix, signaling molecules, and normal cells pushed into abnormal states. Cancer cells live inside that environment, change it, and depend on it.</p> <p>This leads to the question that started our project:</p> <blockquote> <p>Why would we study stromal remodeling, neural-guidance signaling, or tissue communication when the disease is cancer?</p> </blockquote> <p>The short answer is that these programs are not outside cancer biology. They are outside a <strong>cancer-cell-only</strong> view of cancer biology.</p> <h2 id="a-bulk-tumor-sample-is-a-mixture">A bulk tumor sample is a mixture</h2> <p>Bulk gene-expression data measure RNA from a piece of tissue. The result is usually one expression vector per tumor sample, but that vector combines RNA from many cell populations. A useful mental model is</p> \[\text{bulk expression} = \sum_c (\text{fraction of cell type }c) \times (\text{expression within cell type }c).\] <p>If a collagen gene is high in a bulk tumor, at least two explanations are possible. The tumor may contain more collagen-producing fibroblasts, or the fibroblasts already present may be expressing more collagen. Both can happen at once. Bulk data alone cannot fully separate them.</p> <p>That matters because the non-malignant compartments are active participants in disease. Cancer-associated fibroblasts can reorganize extracellular matrix. Endothelial cells form and alter blood vessels. Myeloid and lymphoid cells can support or restrain antitumor immunity. Matrix density and tissue architecture can affect invasion, drug penetration, and cell migration. A signature produced by these compartments may therefore associate with progression even if the genes are not primarily expressed by malignant epithelial cells.</p> <h2 id="why-begin-with-a-cross-system-gene-axis">Why begin with a cross-system gene axis?</h2> <p>Our starting gene set brought together stromal-remodeling, neural-guidance, and related signaling genes. It was assembled from bladder-cancer and broader cancer literature before the colorectal cancer outcome analysis. That history is important: the list was not a colorectal cancer signature selected to maximize survival separation.</p> <p>Applying it to colorectal cancer was therefore a <strong>cross-cancer hypothesis test</strong>. We were asking whether a program motivated elsewhere would appear reproducibly in colorectal tumors and whether it would track progression-related outcomes.</p> <p>There was a biological reason to try. Developmental and tissue-remodeling programs are frequently reused in disease. Molecules first studied in axon guidance may also influence cell migration, vascular patterning, or stromal signaling. EMT-related regulators may connect epithelial plasticity to matrix-rich tumor states. The name of the field in which a gene was discovered does not restrict the gene to that field.</p> <p>But this reasoning creates a risk. If we start with an interesting label such as <em>neural-stromal axis</em>, we may be tempted to interpret any association as evidence for the entire proposed mechanism. The analysis therefore had to ask not only whether the score worked, but <strong>what part of it was doing the work</strong>.</p> <h2 id="what-the-colorectal-cancer-data-showed">What the colorectal cancer data showed</h2> <p>The frozen 87-gene score was evaluated across 11 GEO cohorts containing 1,783 tumors and 441 progression-related events. A one-standard-deviation increase in the score was associated with shorter progression-related survival, with a pooled hazard ratio of 1.33. A locked application to 376 TCGA COAD/READ tumors gave a hazard ratio of 1.25 for progression-free interval.</p> <p>Those results established a reproducible association. They did not yet identify its cellular source.</p> <p>The next analyses changed the interpretation:</p> <ul> <li>The stromal-remodeling module reproduced most of the survival association.</li> <li>Removing stromal genes weakened the full-score association much more than removing neural-guidance genes.</li> <li>The score was strongly correlated with CMS4-like, cancer-associated fibroblast, stromal, and purity measures.</li> <li>A related 84-gene annotation score localized most strongly to fibroblast and other stromal compartments in single-cell data.</li> <li>After removing measured CMS4, CAF, stromal, and purity components using a cross-fitted model, no clear residual survival association remained.</li> </ul> <p>The result was not “we found a neural mechanism.” It was more specific and better supported: the score captured a <strong>fibroblast-rich, CMS4-like tumor state</strong> associated with progression-related outcomes.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/cancer-signature-series/cell-type-effects-480.webp 480w,/assets/img/blog/cancer-signature-series/cell-type-effects-800.webp 800w,/assets/img/blog/cancer-signature-series/cell-type-effects-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/blog/cancer-signature-series/cell-type-effects.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" alt="Immune and stromal score differences between low-axis and high-axis colorectal tumors" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <div class="caption"> Bulk microenvironment comparisons showed higher CAF, endothelial, macrophage, and stromal-related scores in high-axis tumors. These comparisons help interpret the mixture; they do not identify a causal cell type by themselves. </div> <h2 id="a-more-precise-conclusion-is-not-a-weaker-conclusion">A more precise conclusion is not a weaker conclusion</h2> <p>It can feel disappointing when an exciting multicomponent hypothesis becomes “mostly stromal.” Scientifically, the opposite is true. The revised conclusion tells us what the data actually support.</p> <p>The score still captures meaningful tumor biology. Stromal abundance and stromal-cell state are not technical nuisances. They are features of the tumor microenvironment. What changed is the level of novelty we can claim. The data support a reproducible microenvironmental state, but they do not show that the score is independent of established stromal biology or that it represents a tumor-cell-intrinsic neural program.</p> <p>This distinction gives us three separate questions for the rest of the series:</p> <ol> <li><strong>What biological program does the score represent?</strong></li> <li><strong>What is the correct independent unit in each dataset?</strong></li> <li><strong>Does the score add information beyond what we already know?</strong></li> </ol> <p>The answers require different methods. No single heatmap, cluster plot, or survival curve can answer all three.</p> <h2 id="what-we-can-and-cannot-say">What we can and cannot say</h2> <p><strong>Supported:</strong> Tumors are mixtures of malignant and non-malignant compartments. The frozen score is associated with progression-related outcomes and is strongly stromal-dominant.</p> <p><strong>Not supported:</strong> The study does not demonstrate a new neural mechanism, prove causality, or establish a clinically deployable biomarker.</p> <p>The larger lesson is simple: looking beyond malignant cells is not leaving cancer biology. It is treating cancer as the tissue-level disease that it is.</p> <h2 id="further-reading">Further reading</h2> <ul> <li>Isella et al., <a href="https://doi.org/10.1038/ng.3224" rel="external nofollow noopener" target="_blank"><em>Stromal contribution to the colorectal cancer transcriptome</em></a>.</li> <li>Guinney et al., <a href="https://doi.org/10.1038/nm.3967" rel="external nofollow noopener" target="_blank"><em>The consensus molecular subtypes of colorectal cancer</em></a>.</li> <li>Sahai et al., <a href="https://doi.org/10.1038/s41568-019-0238-1" rel="external nofollow noopener" target="_blank"><em>A framework for advancing our understanding of cancer-associated fibroblasts</em></a>.</li> </ul> <p><strong>Next:</strong> <a href="/blog/2026/neural-stromal-and-emt-labels/">Are neural, stromal, and EMT programs really separate?</a></p> </div> </article> </div> </div> <footer class="sticky-bottom mt-5" role="contentinfo"> <div class="container"> © Copyright 2026 Tia Zheng. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "About",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "Blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-projects",
+          title: "Projects",
+          description: "Research, analysis, and coding projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "post-when-adjustment-removes-the-biology-we-wanted-to-study",
+        
+          title: "When adjustment removes the biology we wanted to study",
+        
+        description: "Adjustment can control confounding or redefine the scientific question, and cross-fitting cannot repair noisy measurements or a misspecified model.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/when-adjustment-removes-biology/";
+          
+        },
+      },{id: "post-how-independent-must-a-biomarker-be",
+        
+          title: "How independent must a biomarker be?",
+        
+        description: "Prognostic association, biological meaning, and added clinical value are different standards, and a marker can meet one without meeting all three.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/how-independent-must-a-biomarker-be/";
+          
+        },
+      },{id: "post-kaplan-meier-and-cox-models-why-do-we-need-both",
+        
+          title: "Kaplan-Meier and Cox models: why do we need both?",
+        
+        description: "Kaplan-Meier curves show survival experience, while Cox models quantify associations and can use continuous predictors and clinical covariates.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kaplan-meier-and-cox/";
+          
+        },
+      },{id: "post-pca-and-clustering-find-patterns-but-do-not-prove-prognosis",
+        
+          title: "PCA and clustering find patterns, but do not prove prognosis",
+        
+        description: "PCA summarizes variation and clustering assigns groups; neither method knows whether those groups matter for patient outcomes.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/pca-clustering-patterns-not-prognosis/";
+          
+        },
+      },{id: "post-why-433-804-cells-are-not-433-804-patients",
+        
+          title: "Why 433,804 cells are not 433,804 patients",
+        
+        description: "Single cells are nested within people, so patient-level questions require patient-level replication rather than treating every cell as independent.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/cells-are-not-patients/";
+          
+        },
+      },{id: "post-are-neural-stromal-and-emt-programs-really-separate",
+        
+          title: "Are neural, stromal, and EMT programs really separate?",
+        
+        description: "Biological labels are useful maps, but shared genes and reused developmental programs do not automatically prove a unified mechanism.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/neural-stromal-and-emt-labels/";
+          
+        },
+      },{id: "post-why-looking-beyond-cancer-cells-helps-us-understand-cancer",
+        
+          title: "Why looking beyond cancer cells helps us understand cancer",
+        
+        description: "A tumor is a tissue ecosystem, so a prognostic expression signal may come from fibroblasts, matrix, vessels, and immune cells as well as malignant cells.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/looking-beyond-cancer-cells/";
+          
+        },
+      },{id: "post-dimensionality-reduction-and-sparse-regression-in-an-exploratory-single-cell-analysis",
+        
+          title: "Dimensionality reduction and sparse regression in an exploratory single-cell analysis",
+        
+        description: "A technical companion on PCA, t-SNE, UMAP, and sparse survival modeling using an earlier exploratory GSE178341 workflow.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/dimensionality-reduction-and-sparse-regression-in-single-cell/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-a-simple-inline-announcement",
+          title: 'A simple inline announcement.',
+          description: "",
+          section: "News",},{id: "news-a-long-announcement-with-details",
+          title: 'A long announcement with details',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_2/";
+            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',
+          description: "",
+          section: "News",},{id: "projects-project-1",
+          title: 'project 1',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_project/";
+            },},{id: "projects-project-2",
+          title: 'project 2',
+          description: "a project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_project/";
+            },},{id: "projects-project-3-with-very-long-name",
+          title: 'project 3 with very long name',
+          description: "a project that redirects to another website",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_project/";
+            },},{id: "projects-project-4",
+          title: 'project 4',
+          description: "another without an image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/4_project/";
+            },},{id: "projects-project-5",
+          title: 'project 5',
+          description: "a project with a background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project/";
+            },},{id: "projects-project-6",
+          title: 'project 6',
+          description: "a project with no image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_project/";
+            },},{id: "projects-project-7",
+          title: 'project 7',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/7_project/";
+            },},{id: "projects-project-8",
+          title: 'project 8',
+          description: "an other project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_project/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/9_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/example_pdf.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%79%6F%75@%65%78%61%6D%70%6C%65.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-inspire',
+        title: 'Inspire HEP',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://inspirehep.net/authors/1010907", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=qc6CJjYAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-custom_social',
+        title: 'Custom_social',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.alberteinstein.com/", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

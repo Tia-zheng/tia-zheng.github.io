@@ -1,0 +1,268 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> When adjustment removes the biology we wanted to study | Tia Zheng </title> <meta name="author" content="Tia Zheng"> <meta name="description" content="Adjustment can control confounding or redefine the scientific question, and cross-fitting cannot repair noisy measurements or a misspecified model."> <meta name="keywords" content="bioinformatics, cancer biology, single-cell analysis, data science, research blog"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%AC&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://tia-zheng.github.io/blog/2026/when-adjustment-removes-biology/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Tia</span> Zheng </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">Blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">Projects </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">When adjustment removes the biology we wanted to study</h1> <p class="post-meta"> Created on August 14, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/causal-inference"> <i class="fa-solid fa-hashtag fa-sm"></i> causal-inference</a>   <a href="/blog/tag/residualization"> <i class="fa-solid fa-hashtag fa-sm"></i> residualization</a>   <a href="/blog/tag/cross-fitting"> <i class="fa-solid fa-hashtag fa-sm"></i> cross-fitting</a>   <a href="/blog/tag/simulation"> <i class="fa-solid fa-hashtag fa-sm"></i> simulation</a>   <a href="/blog/tag/biomarkers"> <i class="fa-solid fa-hashtag fa-sm"></i> biomarkers</a>   <a href="/blog/tag/biostatistics"> <i class="fa-solid fa-hashtag fa-sm"></i> biostatistics</a>   ·   <a href="/blog/category/cancer-signature-series"> <i class="fa-solid fa-tag fa-sm"></i> cancer-signature-series</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <blockquote> <p><strong>Beyond the Tumor Cell, Part 7 of 7.</strong> <a href="/blog/cancer-signature-series/">View the complete series.</a></p> </blockquote> <p>Statistical adjustment is often described as “making a comparison fair.” We include stage, tumor subtype, stromal abundance, or purity so that the remaining association is less confounded.</p> <p>That description is useful, but incomplete. Adjustment does not simply clean a result. It changes the question.</p> <p>For our expression axis, the unadjusted question was:</p> <blockquote> <p>Is a fibroblast-rich multigene tumor state associated with progression-related outcome?</p> </blockquote> <p>After removing CMS4-like, CAF, stromal, and purity components, the question became:</p> <blockquote> <p>Is the part of this score that cannot be predicted from our measured composition proxies still associated with outcome?</p> </blockquote> <p>Both are legitimate. They are not the same estimand.</p> <h2 id="confounder-mediator-or-part-of-the-exposure">Confounder, mediator, or part of the exposure?</h2> <p>Before adjusting for a variable, we should decide what role it may play.</p> <p>A <strong>confounder</strong> is a common cause of the exposure and outcome. Failing to account for it can create a misleading association.</p> <p>A <strong>mediator</strong> lies on the pathway from exposure to outcome. Adjusting for it removes part of the effect we may be trying to estimate.</p> <p>A <strong>component or proxy of the exposure</strong> measures nearly the same underlying construct. Adjusting for it asks whether anything remains after subtracting shared information.</p> <p>CMS4-like affinity, CAF abundance, stromal score, purity, and the frozen axis are all expression-derived descriptions of tumor composition or state. Their exact causal relationships are not known, and some share genes or tissue architecture. Treating them as ordinary confounders would be too simple.</p> <p>This is the adjustment paradox: removing composition may reduce confounding, but composition may also be the main biology encoded by the score.</p> <h2 id="residualization-as-a-subtraction-problem">Residualization as a subtraction problem</h2> <p>Residualization predicts the axis from measured composition variables, then subtracts the prediction:</p> \[\text{residual axis} = \text{observed axis} - \widehat{\text{axis from CMS4, CAF, stroma, purity}}.\] <p>The residual is the portion not explained by that prediction model. It is not automatically a pure tumor-cell-intrinsic signal. It can still contain unmeasured composition, measurement error, nonlinear relationships, noise, and biology not represented by the comparators.</p> <p>The scale also matters. In this project, held-out residuals remained in units of one standard deviation of the <strong>original</strong> axis and were not standardized again. That allowed the residual hazard ratios to retain a common interpretation across cohorts. Re-standardizing every residual would make a weak, noisy remainder appear artificially large by defining one residual standard deviation as the exposure unit.</p> <h2 id="why-cross-fitting-was-used">Why cross-fitting was used</h2> <p>If the same cohort is used to learn the subtraction model and test the residual, the model can adapt to cohort-specific noise. Cross-fitting separates those roles.</p> <p>For each GEO cohort:</p> <ol> <li>Hold that cohort out.</li> <li>Fit the axis-versus-composition model in the other ten cohorts.</li> <li>Freeze the fitted coefficients.</li> <li>Predict the axis in the held-out cohort.</li> <li>Compute held-out residuals.</li> <li>Join survival data only after residual construction and fit the Cox model.</li> </ol> <p>Each patient’s residual was therefore produced by a model that had not seen that cohort or any survival outcome. A ridge version was used as a sensitivity analysis to stabilize correlated predictors.</p> <p>This design controls a specific problem: information leakage from the held-out cohort into nuisance-model training. It does not guarantee that the nuisance model is biologically correct.</p> <h2 id="what-the-residual-analysis-found">What the residual analysis found</h2> <p>The pooled GEO residual-axis hazard ratio was 1.12, with a 95% confidence interval from 0.77 to 1.64. The external TCGA residual-axis hazard ratio was 1.31, with a confidence interval from 0.63 to 2.74. The linear and ridge versions agreed closely.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/cancer-signature-series/residual-axis-forest-480.webp 480w,/assets/img/blog/cancer-signature-series/residual-axis-forest-800.webp 800w,/assets/img/blog/cancer-signature-series/residual-axis-forest-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/blog/cancer-signature-series/residual-axis-forest.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" alt="Forest plot of cross-fitted residual-axis Cox estimates across GEO cohorts and TCGA" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <div class="caption"> Cross-fitted residual-axis estimates after removing measured CMS4-like, CAF, stromal, and purity components. The pooled estimates are uncertain and do not show a detectable independent residual association. </div> <p>“Not detected” is the right phrase. The intervals are wide enough to include moderate effects. The result does not prove that the true residual effect is exactly zero, and it does not invalidate the original stromal-state association.</p> <p>It narrows the conclusion: this dataset does not provide clear evidence that the axis adds prognosis beyond the measured composition variables.</p> <h2 id="why-we-simulated-the-method">Why we simulated the method</h2> <p>In patient data, the true composition-independent effect is unknown. We cannot calculate bias because we do not know the correct answer. Simulation solves this by creating data with a known data-generating process.</p> <p>The benchmark preserved the 11 GEO cohort sizes and overall event structure. It compared six methods across 13 scenarios with 500 repetitions each, producing 39,000 pooled meta-analysis fits.</p> <p>Under an ideal null with a correctly measured composition variable and an appropriate linear model, cross-fitted linear residualization had a false-positive rate of 0.038, close to the nominal 0.05. When the composition comparators were noisy, the rate increased to 0.102. When the composition relationship was nonlinear, it increased to 0.248.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/cancer-signature-series/simulation-false-positive-rate-480.webp 480w,/assets/img/blog/cancer-signature-series/simulation-false-positive-rate-800.webp 800w,/assets/img/blog/cancer-signature-series/simulation-false-positive-rate-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/blog/cancer-signature-series/simulation-false-positive-rate.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" alt="False-positive rates for adjustment methods under simulated scenarios" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <div class="caption"> Simulation reveals the boundary of the method. Cross-fitting controls leakage under the ideal null, but noisy composition measurements and nonlinear relationships can still produce false-positive residual associations. </div> <p>The simulation does not prove which scenario describes the real tumors. It shows what must be true for the method to behave well and where it can fail.</p> <h2 id="adjustment-cannot-create-a-perfect-measurement">Adjustment cannot create a perfect measurement</h2> <p>There are three reasons a residual may be misleading even with correct cross-fitting.</p> <p><strong>Measurement error:</strong> CAF and purity estimates are themselves imperfect. Subtracting an imperfect proxy leaves part of the original composition signal behind.</p> <p><strong>Model misspecification:</strong> A linear model cannot fully remove a curved or interactive relationship.</p> <p><strong>Shared construction:</strong> If an axis and comparator reuse genes or reflect the same tissue architecture, their statistical separation may not correspond to separable biological processes.</p> <p>Cross-fitting addresses none of these by itself. It is a design tool, not a universal correction.</p> <h2 id="did-adjustment-remove-too-much">Did adjustment remove “too much”?</h2> <p>That depends on the question.</p> <p>For a clinical incremental-value question, removing known stromal information is appropriate. A new assay should demonstrate what it adds.</p> <p>For a tissue-state question, the original axis is the relevant exposure. Removing stroma would discard the phenomenon of interest.</p> <p>For a causal question, neither analysis is sufficient without a defensible causal model and stronger experimental or longitudinal evidence.</p> <p>The safest interpretation reports both analyses and names their targets. The original score captures a prognostic microenvironmental state. The residual analysis asks for additional information beyond measured composition and does not detect it clearly.</p> <h2 id="what-we-can-and-cannot-say">What we can and cannot say</h2> <p><strong>Supported:</strong> Cross-fitted residualization prevents the held-out cohort and its outcomes from shaping the nuisance model. Under the stated linear model, the analysis did not detect a composition-independent residual association.</p> <p><strong>Not supported:</strong> Cross-fitting does not prove that composition was measured without error, that the nuisance relationship was correctly specified, or that the original stromal-state association was false. The residual result is not evidence for an exactly zero biological effect.</p> <h2 id="five-lessons-from-the-full-series">Five lessons from the full series</h2> <ol> <li>Cancer biology extends beyond malignant cells to the tissue ecosystem.</li> <li>Pathway labels are hypotheses; reused genes do not prove a unified mechanism.</li> <li>Cells and spatial spots are measurements, not independent patients.</li> <li>PCA, clustering, Kaplan-Meier, and Cox models answer different questions.</li> <li>Adjustment is meaningful only after we specify what we are trying to estimate.</li> </ol> <p>The final scientific story is therefore more modest than the starting idea, but more reliable. We found a reproducible, stromal-dominant colorectal cancer state associated with progression-related outcomes. We did not establish a tumor-intrinsic neural mechanism, a composition-independent prognostic signal, or a clinical assay ready for use.</p> <p>That is not an incomplete ending. It is what successful analysis should do: transform an interesting hypothesis into the most precise claim the evidence can support.</p> <p><strong>Previous:</strong> <a href="/blog/2026/how-independent-must-a-biomarker-be/">How independent must a biomarker be?</a><br> <strong>Return to:</strong> <a href="/blog/cancer-signature-series/">Beyond the Tumor Cell: the complete series.</a></p> </div> </article> </div> </div> <footer class="sticky-bottom mt-5" role="contentinfo"> <div class="container"> © Copyright 2026 Tia Zheng. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "About",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "Blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-projects",
+          title: "Projects",
+          description: "Research, analysis, and coding projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "post-when-adjustment-removes-the-biology-we-wanted-to-study",
+        
+          title: "When adjustment removes the biology we wanted to study",
+        
+        description: "Adjustment can control confounding or redefine the scientific question, and cross-fitting cannot repair noisy measurements or a misspecified model.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/when-adjustment-removes-biology/";
+          
+        },
+      },{id: "post-how-independent-must-a-biomarker-be",
+        
+          title: "How independent must a biomarker be?",
+        
+        description: "Prognostic association, biological meaning, and added clinical value are different standards, and a marker can meet one without meeting all three.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/how-independent-must-a-biomarker-be/";
+          
+        },
+      },{id: "post-kaplan-meier-and-cox-models-why-do-we-need-both",
+        
+          title: "Kaplan-Meier and Cox models: why do we need both?",
+        
+        description: "Kaplan-Meier curves show survival experience, while Cox models quantify associations and can use continuous predictors and clinical covariates.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kaplan-meier-and-cox/";
+          
+        },
+      },{id: "post-pca-and-clustering-find-patterns-but-do-not-prove-prognosis",
+        
+          title: "PCA and clustering find patterns, but do not prove prognosis",
+        
+        description: "PCA summarizes variation and clustering assigns groups; neither method knows whether those groups matter for patient outcomes.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/pca-clustering-patterns-not-prognosis/";
+          
+        },
+      },{id: "post-why-433-804-cells-are-not-433-804-patients",
+        
+          title: "Why 433,804 cells are not 433,804 patients",
+        
+        description: "Single cells are nested within people, so patient-level questions require patient-level replication rather than treating every cell as independent.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/cells-are-not-patients/";
+          
+        },
+      },{id: "post-are-neural-stromal-and-emt-programs-really-separate",
+        
+          title: "Are neural, stromal, and EMT programs really separate?",
+        
+        description: "Biological labels are useful maps, but shared genes and reused developmental programs do not automatically prove a unified mechanism.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/neural-stromal-and-emt-labels/";
+          
+        },
+      },{id: "post-why-looking-beyond-cancer-cells-helps-us-understand-cancer",
+        
+          title: "Why looking beyond cancer cells helps us understand cancer",
+        
+        description: "A tumor is a tissue ecosystem, so a prognostic expression signal may come from fibroblasts, matrix, vessels, and immune cells as well as malignant cells.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/looking-beyond-cancer-cells/";
+          
+        },
+      },{id: "post-dimensionality-reduction-and-sparse-regression-in-an-exploratory-single-cell-analysis",
+        
+          title: "Dimensionality reduction and sparse regression in an exploratory single-cell analysis",
+        
+        description: "A technical companion on PCA, t-SNE, UMAP, and sparse survival modeling using an earlier exploratory GSE178341 workflow.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/dimensionality-reduction-and-sparse-regression-in-single-cell/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-a-simple-inline-announcement",
+          title: 'A simple inline announcement.',
+          description: "",
+          section: "News",},{id: "news-a-long-announcement-with-details",
+          title: 'A long announcement with details',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_2/";
+            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',
+          description: "",
+          section: "News",},{id: "projects-project-1",
+          title: 'project 1',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_project/";
+            },},{id: "projects-project-2",
+          title: 'project 2',
+          description: "a project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_project/";
+            },},{id: "projects-project-3-with-very-long-name",
+          title: 'project 3 with very long name',
+          description: "a project that redirects to another website",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_project/";
+            },},{id: "projects-project-4",
+          title: 'project 4',
+          description: "another without an image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/4_project/";
+            },},{id: "projects-project-5",
+          title: 'project 5',
+          description: "a project with a background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project/";
+            },},{id: "projects-project-6",
+          title: 'project 6',
+          description: "a project with no image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_project/";
+            },},{id: "projects-project-7",
+          title: 'project 7',
+          description: "with background image",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/7_project/";
+            },},{id: "projects-project-8",
+          title: 'project 8',
+          description: "an other project with a background image and giscus comments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_project/";
+            },},{id: "projects-project-9",
+          title: 'project 9',
+          description: "another project with an image 🎉",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/9_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/example_pdf.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%79%6F%75@%65%78%61%6D%70%6C%65.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-inspire',
+        title: 'Inspire HEP',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://inspirehep.net/authors/1010907", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=qc6CJjYAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-custom_social',
+        title: 'Custom_social',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.alberteinstein.com/", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
