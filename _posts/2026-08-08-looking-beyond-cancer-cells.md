@@ -40,9 +40,9 @@ That matters because the non-malignant compartments are active participants in d
 
 ## Why begin with a cross-system gene axis?
 
-Our starting gene set brought together stromal-remodeling, neural-guidance, and related signaling genes. It was assembled from bladder-cancer and broader cancer literature before the colorectal cancer outcome analysis. That history is important: the list was not a colorectal cancer signature selected to maximize survival separation.
+Our starting gene set brought together stromal-remodeling, neural-guidance, and related signaling genes. We assembled this cross-system axis from a literature review before analyzing colorectal cancer outcomes. The idea came from our initial reading: cancer never acts alone. The changes that allow a tumor to progress are rarely a single-discipline question, so we wanted to test whether these three programs were related and could work together to affect the tumor as a whole.
 
-Applying it to colorectal cancer was therefore a **cross-cancer hypothesis test**. We were asking whether a program motivated elsewhere would appear reproducibly in colorectal tumors and whether it would track progression-related outcomes.
+That history is important. The axis was not a signature selected to maximize survival separation. Applying it to colorectal cancer tested whether this literature-based program appeared reproducibly in colorectal tumors and was associated with progression-related outcomes.
 
 There was a biological reason to try. Developmental and tissue-remodeling programs are frequently reused in disease. Molecules first studied in axon guidance may also influence cell migration, vascular patterning, or stromal signaling. EMT-related regulators may connect epithelial plasticity to matrix-rich tumor states. The name of the field in which a gene was discovered does not restrict the gene to that field.
 
@@ -62,7 +62,7 @@ The next analyses changed the interpretation:
 - A related 84-gene annotation score localized most strongly to fibroblast and other stromal compartments in single-cell data.
 - After removing measured CMS4, CAF, stromal, and purity components using a cross-fitted model, no clear residual survival association remained.
 
-The result was not “we found a neural mechanism.” It was more specific and better supported: the score captured a **fibroblast-rich, CMS4-like tumor state** associated with progression-related outcomes.
+Together, these analyses showed that the score mainly described a **fibroblast-rich tumor state** associated with progression-related outcomes, rather than a newly identified neural pathway or mechanism.
 
 {% include figure.liquid path="assets/img/blog/cancer-signature-series/cell-type-effects.png" class="img-fluid rounded z-depth-1" zoomable=true alt="Immune and stromal score differences between low-axis and high-axis colorectal tumors" %}
 
@@ -84,11 +84,9 @@ This distinction gives us three separate questions for the rest of the series:
 
 The answers require different methods. No single heatmap, cluster plot, or survival curve can answer all three.
 
-## What we can and cannot say
+## Current limitations
 
-**Supported:** Tumors are mixtures of malignant and non-malignant compartments. The frozen score is associated with progression-related outcomes and is strongly stromal-dominant.
-
-**Not supported:** The study does not demonstrate a new neural mechanism, prove causality, or establish a clinically deployable biomarker.
+This study does not yet demonstrate a new neural mechanism, prove causality, or establish a clinically deployable biomarker. The score was associated with progression-related outcomes and was strongly stromal-dominant, but association alone cannot show which cells or pathways directly cause progression. Additional experimental validation and prospective clinical testing would be needed before making those claims.
 
 The larger lesson is simple: looking beyond malignant cells is not leaving cancer biology. It is treating cancer as the tissue-level disease that it is.
 
