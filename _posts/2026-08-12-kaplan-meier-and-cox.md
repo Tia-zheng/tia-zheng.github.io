@@ -112,7 +112,7 @@ A log-rank comparison may be nonsignificant while a continuous Cox model is info
 
 Disagreement is therefore diagnostic. It should prompt us to inspect cutoffs, assumptions, covariates, event counts, and the analysis plan rather than selecting whichever result looks better.
 
-## What we can and cannot say
+## What Our Conclusions Support
 
 **Supported:** Kaplan-Meier curves provide an interpretable grouped display, while Cox models quantify continuous and adjusted associations. Using both can make the evidence easier to inspect.
 
