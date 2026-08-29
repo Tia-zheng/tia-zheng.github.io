@@ -101,7 +101,7 @@ It helps to separate the workflow into three stages:
 
 Confusion appears when evidence from one stage is used to claim success at another. Clear separation at the map stage is not a survival result. A small survival value in the same data used to choose a map is not external validation.
 
-## What we can and cannot say
+## What Our Conclusions Support
 
 **Supported:** The evidence genes contain a strong coordinated expression pattern, and the frozen continuous score is associated with progression-related outcomes across cohorts.
 
