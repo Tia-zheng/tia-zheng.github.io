@@ -83,7 +83,7 @@ Single-cell maps also show why one label is rarely enough. _LUM_ and _COL1A1_ ar
   Different members of the proposed axis occupy different parts of the single-cell atlas. Shared membership in a gene list should not be confused with a single cellular source or mechanism.
 </div>
 
-## What we can and cannot say
+## What Our Conclusions Support
 
 **Supported:** Developmental, EMT, vascular, and stromal programs reuse molecular tools. In this dataset, the multigene survival association is stromal-dominant and is not reducible to _VIM_ alone.
 
