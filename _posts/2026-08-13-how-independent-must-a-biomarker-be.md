@@ -108,7 +108,7 @@ The analysis is identical only on the surface. The scientific target, or **estim
 
 This is why the paper uses cautious language. It describes a stromal-dominant prognostic state, not a clinically independent biomarker. That wording preserves the result that is supported without implying the result we hoped to see.
 
-## What we can and cannot say
+## What Our Conclusions Support
 
 **Supported:** The score is reproducibly associated with progression-related outcome and has a coherent fibroblast-rich, CMS4-like interpretation. Its stage-adjusted association persisted in the subset with stage data.
 
