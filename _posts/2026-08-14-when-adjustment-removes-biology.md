@@ -126,7 +126,7 @@ For a causal question, neither analysis is sufficient without a defensible causa
 
 The safest interpretation reports both analyses and names their targets. The original score captures a prognostic microenvironmental state. The residual analysis asks for additional information beyond measured composition and does not detect it clearly.
 
-## What we can and cannot say
+## What Our Conclusions Support
 
 **Supported:** Cross-fitted residualization prevents the held-out cohort and its outcomes from shaping the nuisance model. Under the stated linear model, the analysis did not detect a composition-independent residual association.
 
