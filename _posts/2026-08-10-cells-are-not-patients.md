@@ -102,7 +102,7 @@ Before running a statistical test on single-cell or spatial data, ask:
 
 If the claim is about patients, the uncertainty must ultimately come from variation across patients.
 
-## What we can and cannot say
+## What Our Conclusions Support
 
 **Supported:** Hundreds of thousands of cells provide rich cellular localization. Patient-level pseudobulk analysis can test tumor-normal state differences while preserving the patient as the inferential unit.
 
