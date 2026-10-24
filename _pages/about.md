@@ -4,7 +4,11 @@ title: About
 permalink: /
 subtitle: ""
 
-profile: false
+profile:
+  align: right
+  image: tia-zheng-lab.jpg
+  image_circular: false
+  more_info: ""
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
@@ -19,6 +23,23 @@ latest_posts:
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
+
+<style>
+  .post .profile {
+    width: 220px;
+    max-width: 40%;
+    margin: 0 0 1rem 1.5rem;
+  }
+
+  @media (max-width: 575.98px) {
+    .post .profile {
+      float: none !important;
+      width: 180px;
+      max-width: 100%;
+      margin: 0 auto 1.5rem;
+    }
+  }
+</style>
 
 I am Tia Zheng. This is my personal research website and blog for bioinformatics, cancer biology, single-cell analysis, and data science.
 
