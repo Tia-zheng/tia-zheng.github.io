@@ -127,7 +127,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Blog # blog_name will be displayed in your blog page
-blog_description: Notes on cancer biology, bioinformatics, evidence, and scientific inference.
+blog_description: Questions and methods from my colorectal cancer research.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 

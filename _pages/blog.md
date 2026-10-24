@@ -28,6 +28,10 @@ pagination:
     <h2>{{ site.blog_description }}</h2>
   </div>
   <p class="text-center">
+    These posts grew out of my work on an 87-gene axis in colorectal cancer.
+    <a href="https://doi.org/10.64898/2026.09.18.752659">Read the preprint</a>.
+  </p>
+  <p class="text-center">
     <strong>Featured series:</strong>
     <a href="{{ '/blog/cancer-signature-series/' | relative_url }}">Beyond the Tumor Cell: What Does a Cancer Signature Really Mean?</a>
   </p>
