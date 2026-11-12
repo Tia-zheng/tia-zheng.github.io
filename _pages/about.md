@@ -43,6 +43,6 @@ latest_posts:
 
 I am a student researcher at Western Reserve Academy in Hudson, Ohio. This is my personal website and blog on bioinformatics, cancer biology, and data science.
 
-Most of this site grew out of my colorectal cancer research in the summer of 2026. I studied how a pattern of activity across 87 genes related to patient outcomes. Looking at individual cells helped me trace much of that pattern to fibroblasts, which build and maintain connective tissue.
+My research asks how patient data can reveal biological patterns linked to cancer progression. I am interested in using mathematical modeling and machine learning to understand complex, heterogeneous biomedical data.
 
-You can read the [project summary and preprint]({{ '/projects/' | relative_url }}). On [the blog]({{ '/blog/' | relative_url }}), I write about questions I had along the way, including how to compare patients when one tumor sample contributes far more cells than another.
+The posts on this blog grew out of my colorectal cancer research. Explore the [project and preprint]({{ '/projects/' | relative_url }}) or read the [questions and methods behind the work]({{ '/blog/' | relative_url }}).
