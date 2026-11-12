@@ -41,8 +41,8 @@ latest_posts:
   }
 </style>
 
-I am a student researcher at Western Reserve Academy in Hudson, Ohio. This is my personal website and blog on bioinformatics, cancer biology, and data science. I’m interested in how mathematical modeling and machine learning can help us understand why the same type of cancer can progress differently from one patient to the next.
+I am a student researcher at Western Reserve Academy in Hudson, Ohio. This is my personal website and blog on bioinformatics, cancer biology, and data science.
 
-Most of this site grew out of my colorectal cancer research in the summer of 2026. I studied a pattern of activity across 87 genes and wanted to know how it related to patient outcomes. I also wanted to know which cells in a tumor contributed to that pattern. Looking at individual cells helped me trace much of it to fibroblasts, which build and maintain connective tissue.
+Most of this site grew out of my colorectal cancer research in the summer of 2026. I studied how a pattern of activity across 87 genes related to patient outcomes. Looking at individual cells helped me trace much of that pattern to fibroblasts, which build and maintain connective tissue.
 
 You can read the [project summary and preprint]({{ '/projects/' | relative_url }}). On [the blog]({{ '/blog/' | relative_url }}), I write about questions I had along the way, including how to compare patients when one tumor sample contributes far more cells than another.
