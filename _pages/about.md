@@ -41,8 +41,8 @@ latest_posts:
   }
 </style>
 
-I am Tia Zheng. This is my personal research website and blog for bioinformatics, cancer biology, single-cell analysis, and data science.
+I am a student researcher at Western Reserve Academy in Hudson, Ohio. This is my personal website and blog on bioinformatics, cancer biology, and data science. I’m interested in how mathematical modeling and machine learning can help us understand why the same type of cancer can progress differently from one patient to the next.
 
-My research asks how patient data can reveal biological patterns linked to cancer progression. I am interested in using mathematical modeling and machine learning to understand complex, heterogeneous biomedical data.
+Most of this site grew out of my colorectal cancer research in the summer of 2026. I studied a pattern of activity across 87 genes and wanted to know how it related to patient outcomes. I also wanted to know which cells in a tumor contributed to that pattern. Looking at individual cells helped me trace much of it to fibroblasts, which build and maintain connective tissue.
 
-The posts on this blog grew out of my colorectal cancer research. Explore the [project and preprint]({{ '/projects/' | relative_url }}) or read the [questions and methods behind the work]({{ '/blog/' | relative_url }}).
+You can read the [project summary and preprint]({{ '/projects/' | relative_url }}). On [the blog]({{ '/blog/' | relative_url }}), I write about questions I had along the way, including how to compare patients when one tumor sample contributes far more cells than another.
